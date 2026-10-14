@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Container } from '../design-system/Card'
 import { Button } from '../design-system/Button'
+import { Icon } from '../design-system/Icon'
 
 export default function NotFound() {
   return (
@@ -19,9 +20,9 @@ export default function NotFound() {
       <motion.div
         animate={{ y: [0, -14, 0], rotate: [0, 4, -4, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative z-10 text-7xl"
+        className="relative z-10"
       >
-        ✈️
+        <Icon name="plane" className="h-20 w-20 text-(--color-ivory-orange)" strokeWidth={1} />
       </motion.div>
       <Container className="relative z-10 mt-6">
         <h1 className="font-display text-4xl font-bold">Vol détourné — 404</h1>

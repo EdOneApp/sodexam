@@ -1,10 +1,18 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Container, Card, SectionTitle } from '../design-system/Card'
+import { Icon } from '../design-system/Icon'
 import { getAeroport } from '../data/aeroports'
 import { meteoActuelle, metarFactice } from '../lib/weather-sim'
 import { WeatherIcon } from '../design-system/WeatherIcon'
 import { actualites } from '../data/actualites'
+import yamoussoukroImage from '../assets/photos/yamoussoukro-aerogare.jpg'
+import sanPedroImage from '../assets/photos/san-pedro-aerogare.jpg'
+
+const photosParCode: Record<string, string> = {
+  DIYO: yamoussoukroImage,
+  DISP: sanPedroImage,
+}
 
 export default function AeroportDetail() {
   const { code = '' } = useParams()
@@ -14,6 +22,7 @@ export default function AeroportDetail() {
   const meteo = meteoActuelle(aeroport.code)
   const metar = metarFactice(aeroport.code)
   const actusLiees = actualites.filter((a) => a.plateforme === aeroport.ville).slice(0, 2)
+  const photo = photosParCode[aeroport.code]
 
   return (
     <div className="py-16">
@@ -24,9 +33,15 @@ export default function AeroportDetail() {
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="mt-6 flex h-56 items-center justify-center rounded-3xl bg-gradient-to-br from-(--color-sky) to-(--color-night) text-6xl text-white/70 sm:h-72"
+          className="mt-6 h-56 overflow-hidden rounded-3xl sm:h-80"
         >
-          ✈️
+          {photo ? (
+            <img src={photo} alt={aeroport.nom} className="h-full w-full object-cover" />
+          ) : (
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-(--color-sky) to-(--color-night)">
+              <Icon name="plane" className="h-16 w-16 text-white/70" strokeWidth={1.2} />
+            </div>
+          )}
         </motion.div>
 
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">

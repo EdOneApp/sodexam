@@ -4,6 +4,8 @@ import { Container, SectionTitle } from '../design-system/Card'
 import { Button } from '../design-system/Button'
 import { SplitTitle } from '../components/SplitTitle'
 import { AirportsMap } from '../components/AirportsMap'
+import { MapBoundary } from '../components/MapBoundary'
+import { Icon } from '../design-system/Icon'
 
 export default function Contact() {
   const [envoye, setEnvoye] = useState(false)
@@ -14,7 +16,9 @@ export default function Contact() {
         <SplitTitle text="Contact" className="text-4xl font-bold sm:text-5xl" />
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
-          <AirportsMap height={420} />
+          <MapBoundary height={420}>
+            <AirportsMap height={420} />
+          </MapBoundary>
 
           <div className="relative">
             <AnimatePresence mode="wait">
@@ -26,12 +30,12 @@ export default function Contact() {
                   className="flex h-full flex-col items-center justify-center rounded-2xl border border-black/10 p-10 text-center dark:border-white/10"
                 >
                   <motion.div
-                    initial={{ x: -60, y: 40, rotate: -25, opacity: 0 }}
-                    animate={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
-                    transition={{ duration: 0.9, ease: 'easeOut' }}
-                    className="text-5xl"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    className="flex h-16 w-16 items-center justify-center rounded-full bg-(--color-forest)/10"
                   >
-                    ✈️
+                    <Icon name="check" className="h-8 w-8 text-(--color-forest)" strokeWidth={2} />
                   </motion.div>
                   <h3 className="mt-4 font-display text-xl font-semibold">Message envoyé</h3>
                   <p className="mt-2 text-sm text-black/60 dark:text-white/60">Simulation — aucun message n’a réellement été transmis.</p>

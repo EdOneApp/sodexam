@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Container, Card, SectionTitle } from '../design-system/Card'
 import { SplitTitle } from '../components/SplitTitle'
+import { Icon } from '../design-system/Icon'
 
 const etapes = [
   { titre: 'Décollage — Abidjan FIR', texte: 'Le contrôle d’approche guide l’appareil depuis la piste jusqu’à l’espace aérien supérieur.' },
@@ -26,7 +27,9 @@ export default function NavigationAerienne() {
 
         <div ref={ref} className="relative mt-12 h-[70vh] overflow-hidden rounded-3xl bg-gradient-to-b from-(--color-sky) to-(--color-night) p-8">
           <div className="absolute left-8 right-8 top-1/2 h-px bg-white/30" />
-          <motion.div style={{ left: x, rotate }} className="absolute top-1/2 -translate-y-1/2 text-4xl">✈️</motion.div>
+          <motion.div style={{ left: x, rotate }} className="absolute top-1/2 -translate-y-1/2">
+            <Icon name="plane" className="h-9 w-9 text-(--color-ivory-orange)" strokeWidth={1.2} />
+          </motion.div>
           <div className="grid h-full grid-cols-1 content-center gap-6 sm:grid-cols-4">
             {etapes.map((e, i) => (
               <motion.div

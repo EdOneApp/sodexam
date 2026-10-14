@@ -11,10 +11,10 @@ function phaseForHour(h: number): SkyPhase {
 }
 
 export const skyGradients: Record<SkyPhase, string> = {
-  aube: 'linear-gradient(135deg, #0A1F44 0%, #F77F00 55%, #F5F1E8 100%)',
-  zenith: 'linear-gradient(135deg, #1E88E5 0%, #22D3EE 100%)',
-  coucher: 'linear-gradient(135deg, #0A1F44 0%, #F77F00 70%)',
-  nuit: 'linear-gradient(135deg, #050C1E 0%, #0A1F44 100%)',
+  aube: 'linear-gradient(135deg, #151009 0%, #8a3a16 45%, #F15A24 100%)',
+  zenith: 'linear-gradient(135deg, #0b7a42 0%, #0a6334 100%)',
+  coucher: 'linear-gradient(135deg, #151009 0%, #8a3a16 55%, #F15A24 100%)',
+  nuit: 'linear-gradient(135deg, #0b0905 0%, #151009 100%)',
 }
 
 type ThemeContextValue = {

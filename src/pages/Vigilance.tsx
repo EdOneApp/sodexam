@@ -1,52 +1,46 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import clsx from 'clsx'
 import { Container, Card, SectionTitle } from '../design-system/Card'
 import { SplitTitle } from '../components/SplitTitle'
 import { VigilanceBadge } from '../design-system/VigilanceBadge'
-import { zonesVigilance, historiqueVigilance, niveauConseil, type ZoneVigilance } from '../data/vigilance'
+import { VigilanceMap } from '../components/VigilanceMap'
+import { MapBoundary } from '../components/MapBoundary'
+import { zonesVigilance, historiqueVigilance, niveauConseil } from '../data/vigilance'
 
-const niveauBg: Record<string, string> = {
-  vert: 'bg-(--color-vigilance-green)',
-  jaune: 'bg-(--color-vigilance-yellow)',
-  orange: 'bg-(--color-vigilance-orange)',
-  rouge: 'bg-(--color-vigilance-red)',
-}
+const legende = [
+  { niveau: 'vert' as const, couleur: '#1b9e5a' },
+  { niveau: 'jaune' as const, couleur: '#e8b800' },
+  { niveau: 'orange' as const, couleur: '#f15a24' },
+  { niveau: 'rouge' as const, couleur: '#d81f2a' },
+]
 
 export default function Vigilance() {
-  const [selection, setSelection] = useState<ZoneVigilance>(zonesVigilance[0])
+  const [districtSelectionne, setDistrictSelectionne] = useState(zonesVigilance[0].district)
+  const selection = zonesVigilance.find((z) => z.district === districtSelectionne) ?? zonesVigilance[0]
 
   return (
     <div className="py-16">
       <Container>
         <SplitTitle text="Vigilance météorologique" className="text-4xl font-bold sm:text-5xl" />
         <p className="mt-4 max-w-2xl text-black/60 dark:text-white/60">
-          Carte schématique des régions de Côte d’Ivoire, colorée selon le niveau de vigilance en vigueur. Chaque
-          niveau combine toujours une couleur, une icône et un mot, jamais la couleur seule.
+          Carte des 14 districts de Côte d’Ivoire, colorée selon le niveau de vigilance en vigueur. Chaque niveau
+          combine toujours une couleur, une icône et un mot, jamais la couleur seule.
         </p>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
           <div>
-            <div className="mx-auto grid max-w-md gap-2" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
-              {zonesVigilance.map((z) => (
-                <motion.button
-                  key={z.code}
-                  onClick={() => setSelection(z)}
-                  whileHover={{ scale: 1.06 }}
-                  style={{ gridColumnStart: z.col + 1, gridRowStart: z.row + 1 }}
-                  className={clsx(
-                    'relative flex aspect-square flex-col items-center justify-center rounded-xl p-1 text-center text-[10px] font-semibold text-white shadow',
-                    niveauBg[z.niveau],
-                    selection.code === z.code && 'ring-4 ring-white/70',
-                    (z.niveau === 'orange' || z.niveau === 'rouge') && 'animate-pulse-alert',
-                  )}
-                >
-                  {z.nom}
-                </motion.button>
+            <MapBoundary>
+              <VigilanceMap selected={districtSelectionne} onSelect={setDistrictSelectionne} />
+            </MapBoundary>
+            <div className="mt-4 flex flex-wrap gap-4">
+              {legende.map((l) => (
+                <div key={l.niveau} className="flex items-center gap-2 text-xs font-medium text-black/60 dark:text-white/60">
+                  <span className="h-3 w-3 rounded-sm" style={{ backgroundColor: l.couleur }} />
+                  {l.niveau.charAt(0).toUpperCase() + l.niveau.slice(1)}
+                </div>
               ))}
             </div>
-            <p className="mt-6 text-center text-xs text-black/40 dark:text-white/40">
-              Carte schématique (grille) à but illustratif — non cartographique.
+            <p className="mt-2 text-xs text-black/40 dark:text-white/40">
+              Limites administratives : geoBoundaries (CC BY 4.0, World Bank Group / OCHA Côte d’Ivoire).
             </p>
           </div>
 
@@ -58,6 +52,21 @@ export default function Vigilance() {
               <div className="flex justify-between"><dt className="text-black/50 dark:text-white/50">Validité</dt><dd className="font-medium">{selection.validite}</dd></div>
             </dl>
             <p className="mt-4 rounded-xl bg-black/[0.03] p-4 text-sm dark:bg-white/5">{niveauConseil[selection.niveau]}</p>
+
+            <div className="mt-6 space-y-1.5">
+              {zonesVigilance.map((z) => (
+                <button
+                  key={z.district}
+                  onClick={() => setDistrictSelectionne(z.district)}
+                  className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                    z.district === districtSelectionne ? 'bg-black/5 dark:bg-white/10' : 'hover:bg-black/[0.03] dark:hover:bg-white/5'
+                  }`}
+                >
+                  <span>{z.nom}</span>
+                  <VigilanceBadge niveau={z.niveau} small />
+                </button>
+              ))}
+            </div>
           </Card>
         </div>
 

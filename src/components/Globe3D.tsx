@@ -23,7 +23,7 @@ function Scene() {
     <group ref={group}>
       <mesh>
         <sphereGeometry args={[1.5, 48, 48]} />
-        <meshStandardMaterial color="#0A1F44" roughness={0.9} metalness={0.1} />
+        <meshStandardMaterial color="#1f1812" roughness={0.9} metalness={0.1} />
       </mesh>
       <mesh>
         <sphereGeometry args={[1.52, 48, 48]} />
@@ -34,7 +34,7 @@ function Scene() {
         return (
           <mesh key={a.code} position={pos}>
             <sphereGeometry args={[0.028, 12, 12]} />
-            <meshBasicMaterial color={a.statut === 'service' ? '#F77F00' : '#22D3EE'} />
+            <meshBasicMaterial color={a.statut === 'service' ? '#F15A24' : '#22D3EE'} />
           </mesh>
         )
       })}

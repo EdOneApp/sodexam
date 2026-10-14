@@ -5,17 +5,21 @@
   --font-sans: "Inter", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", monospace;
 
-  --color-night: #0a1f44;
-  --color-sky: #1e88e5;
+  /* Palette de marque : couleurs réelles de la Côte d'Ivoire (orange, vert) +
+     encre et crème chaudes en neutres. --color-sky est volontairement
+     repointé vers le vert ivoirien (accent secondaire / liens) plutôt que
+     le bleu : le nom historique reste pour ne pas renommer tous les usages. */
+  --color-night: #151009;
+  --color-sky: #0b7a42;
   --color-radar: #22d3ee;
-  --color-ivory-orange: #f77f00;
-  --color-forest: #009e60;
-  --color-sand: #f5f1e8;
+  --color-ivory-orange: #f15a24;
+  --color-forest: #0a6334;
+  --color-sand: #faf3e6;
 
   --color-vigilance-green: #1b9e5a;
   --color-vigilance-yellow: #e8b800;
-  --color-vigilance-orange: #f77f00;
-  --color-vigilance-red: #e0292e;
+  --color-vigilance-orange: #f15a24;
+  --color-vigilance-red: #d81f2a;
 
   --radius-card: 16px;
 }
@@ -31,13 +35,13 @@ html {
 body {
   font-family: var(--font-sans);
   background-color: var(--color-sand);
-  color: #101826;
+  color: #19140d;
   -webkit-font-smoothing: antialiased;
 }
 
 html.dark body {
   background-color: var(--color-night);
-  color: #eef2f8;
+  color: #f6efe3;
 }
 
 h1, h2, h3, h4, .font-display {
@@ -95,3 +99,46 @@ html.dark .glass {
 }
 
 .maplibregl-ctrl-attrib { font-size: 10px; }
+
+/* Marquee ticker */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+.reduce-motion .marquee-track {
+  animation: none;
+}
+
+/* Subtle film-grain texture for dark hero/sections */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Magnetic button hover sheen */
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, color-mix(in srgb, white 35%, transparent), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.sheen:hover::after {
+  left: 130%;
+}

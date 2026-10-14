@@ -17,9 +17,9 @@ export default function MotDuDG() {
           initial={{ clipPath: 'inset(0 0 100% 0)' }}
           animate={{ clipPath: 'inset(0 0 0% 0)' }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="flex h-80 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-(--color-night) to-(--color-sky) text-6xl text-white/80"
+          className="flex h-80 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-(--color-night) to-(--color-sky) font-display text-6xl font-bold text-white/90"
         >
-          👤
+          AAS
         </motion.div>
         <div>
           <span className="text-xs font-semibold uppercase tracking-widest text-(--color-sky)">Mot du Directeur Général</span>
@@ -36,8 +36,9 @@ export default function MotDuDG() {
             « Notre ambition est simple : faire de la SODEXAM la référence incontestée de la météorologie et de
             l’aéroportuaire en Afrique de l’Ouest, au service de la sécurité et du développement de la Côte d’Ivoire. »
           </motion.blockquote>
+          <p className="mt-2 text-xs text-black/40 dark:text-white/40">Citation d’illustration rédigée pour cette maquette — ne reflète pas une déclaration réelle du Directeur Général.</p>
 
-          <h2 className="mt-10 font-display text-xl font-semibold">Priorités stratégiques</h2>
+          <h2 className="mt-10 font-display text-xl font-semibold">Priorités stratégiques illustrées</h2>
           <ul className="mt-4 space-y-3">
             {priorites.map((p, i) => (
               <motion.li

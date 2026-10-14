@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import type { NiveauVigilance } from '../data/vigilance'
 import { niveauLabel } from '../data/vigilance'
+import { Icon, type IconName } from './Icon'
 
 const colors: Record<NiveauVigilance, string> = {
   vert: 'bg-(--color-vigilance-green) text-white',
@@ -9,11 +10,11 @@ const colors: Record<NiveauVigilance, string> = {
   rouge: 'bg-(--color-vigilance-red) text-white',
 }
 
-const icons: Record<NiveauVigilance, string> = {
-  vert: '●',
-  jaune: '▲',
-  orange: '◆',
-  rouge: '✕',
+const icons: Record<NiveauVigilance, IconName> = {
+  vert: 'circle-dot',
+  jaune: 'alert-triangle',
+  orange: 'alert-triangle',
+  rouge: 'alert-octagon',
 }
 
 export function VigilanceBadge({ niveau, pulse = false, small = false }: { niveau: NiveauVigilance; pulse?: boolean; small?: boolean }) {
@@ -26,7 +27,7 @@ export function VigilanceBadge({ niveau, pulse = false, small = false }: { nivea
         pulse && (niveau === 'orange' || niveau === 'rouge') && 'animate-pulse-alert',
       )}
     >
-      <span aria-hidden>{icons[niveau]}</span>
+      <Icon name={icons[niveau]} className={small ? 'h-3.5 w-3.5' : 'h-4 w-4'} strokeWidth={2.25} />
       {niveauLabel[niveau]}
     </span>
   )

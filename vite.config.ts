@@ -16,8 +16,8 @@ export default defineConfig({
         name: 'SODEXAM — Météo & Aéroports Côte d’Ivoire',
         short_name: 'SODEXAM',
         description: 'Météo, vigilance, aéroports et services aéronautiques de Côte d’Ivoire.',
-        theme_color: '#0A1F44',
-        background_color: '#0A1F44',
+        theme_color: '#151009',
+        background_color: '#151009',
         display: 'standalone',
         start_url: '/',
         icons: [

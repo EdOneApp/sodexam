@@ -9,25 +9,38 @@ import { SplitTitle } from '../components/SplitTitle'
 import { StatCounter } from '../design-system/StatCounter'
 import { VigilanceBadge } from '../design-system/VigilanceBadge'
 import { WeatherIcon } from '../design-system/WeatherIcon'
+import { Icon, type IconName } from '../design-system/Icon'
 import { ErrorBoundary } from '../components/ErrorBoundary'
-import { useTheme, skyGradients } from '../context/ThemeContext'
+import { Marquee } from '../components/Marquee'
+import { useTheme } from '../context/ThemeContext'
 import { meteoActuelle } from '../lib/weather-sim'
 import { actualites } from '../data/actualites'
 import { niveauNational } from '../components/VigilanceBar'
+import { villes } from '../data/villes'
+import heroImage from '../assets/photos/yamoussoukro-aerogare.jpg'
+import stationImage from '../assets/photos/yamoussoukro-station-meteo.jpg'
+import hallImage from '../assets/photos/yamoussoukro-hall.jpg'
+import sanPedroImage from '../assets/photos/san-pedro-aerogare.jpg'
 
 const Globe3D = lazy(() => import('../components/Globe3D').then((m) => ({ default: m.Globe3D })))
 
 gsap.registerPlugin(ScrollTrigger)
 
-const accesRapides = [
-  { label: 'Météo de ma ville', href: '/meteo', icon: '🌤️' },
-  { label: 'Vigilance en direct', href: '/vigilance', icon: '⚠️' },
-  { label: 'Nos aéroports', href: '/aeroports', icon: '✈️' },
-  { label: 'Rendez-vous CERMA', href: '/cerma', icon: '🩺' },
-  { label: 'Demander un devis', href: '/produits', icon: '📄' },
+const accesRapides: { label: string; href: string; icon: IconName }[] = [
+  { label: 'Météo de ma ville', href: '/meteo', icon: 'cloud' },
+  { label: 'Vigilance en direct', href: '/vigilance', icon: 'alert-triangle' },
+  { label: 'Nos aéroports', href: '/aeroports', icon: 'plane' },
+  { label: 'Rendez-vous CERMA', href: '/cerma', icon: 'stethoscope' },
+  { label: 'Demander un devis', href: '/produits', icon: 'document' },
 ]
 
 const partenaires = ['AFD', 'MFI', 'ASECNA', 'OMM', 'Air Côte d’Ivoire', 'ARTCI']
+
+const galerie = [
+  { src: stationImage, legende: 'Station météorologique — plateforme de Yamoussoukro' },
+  { src: hallImage, legende: 'Hall des départs — aérogare de Yamoussoukro' },
+  { src: sanPedroImage, legende: 'Aérogare de San-Pédro' },
+]
 
 function PistePipeline() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -57,27 +70,29 @@ function PistePipeline() {
 
   return (
     <div ref={sectionRef} className="relative h-[80vh] overflow-hidden bg-(--color-night) text-white">
-      <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-4 opacity-100">
+      <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-5 opacity-100">
         <div className="h-40 w-full max-w-lg rounded-full bg-gradient-to-r from-white/10 via-white/30 to-white/10 blur-2xl" />
-        <p className="font-display text-2xl">☁️ Les nuages se forment au-dessus de la Côte d’Ivoire</p>
+        <Icon name="cloud" className="h-9 w-9 text-white/70" strokeWidth={1.4} />
+        <p className="font-display text-2xl">Les nuages se forment au-dessus de la Côte d’Ivoire</p>
       </div>
-      <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-4 opacity-0">
+      <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-5 opacity-0">
         <div className="relative h-56 w-56 rounded-full border-2 border-(--color-radar)/40">
           <div className="absolute inset-0 origin-center animate-spin rounded-full border-t-2 border-(--color-radar)" style={{ animationDuration: '2.5s' }} />
         </div>
-        <p className="font-display text-2xl">📡 Le radar balaye l’espace aérien</p>
+        <Icon name="radar" className="h-9 w-9 text-(--color-radar)" strokeWidth={1.4} />
+        <p className="font-display text-2xl">Le radar balaye l’espace aérien</p>
       </div>
-      <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-4 opacity-0">
-        <div className="text-6xl">🛬</div>
+      <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-5 opacity-0">
+        <Icon name="plane-landing" className="h-14 w-14 text-(--color-ivory-orange)" strokeWidth={1.2} />
         <p className="font-display text-2xl">L’avion se pose en toute sécurité</p>
       </div>
       <div data-stage className="absolute inset-0 flex flex-col items-center justify-center gap-10 px-6 opacity-0">
         <p className="font-display text-2xl">La SODEXAM en chiffres</p>
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
-          <StatCounter value={8} label="Aéroports" />
-          <StatCounter value={30} suffix="+" label="Stations météo" />
-          <StatCounter value={1200} suffix="+" label="Agents" />
-          <StatCounter value={45} suffix=" k" label="Vols traités / an" />
+          <StatCounter value={8} label="Aéroports" light />
+          <StatCounter value={30} suffix="+" label="Stations météo" light />
+          <StatCounter value={1200} suffix="+" label="Agents" light />
+          <StatCounter value={45} suffix=" k" label="Vols traités / an" light />
         </div>
       </div>
     </div>
@@ -86,20 +101,28 @@ function PistePipeline() {
 
 export default function Home() {
   const { t } = useTranslation()
-  const { skyPhase, liteMode } = useTheme()
+  const { liteMode } = useTheme()
   const meteo = meteoActuelle('abidjan')
   const niveau = niveauNational()
   const unes = actualites.slice(0, 3)
+  const villesTicker = villes.slice(0, 12).map((v) => v.nom)
 
   return (
     <div>
-      <section
-        className="relative flex min-h-[88vh] flex-col justify-center overflow-hidden text-white"
-        style={{ background: skyGradients[skyPhase] }}
-      >
-        <div className="absolute inset-0 opacity-30 mix-blend-overlay" style={{ background: 'radial-gradient(circle at 70% 20%, white, transparent 60%)' }} />
-        <Container className="relative z-10">
-          <SplitTitle text={t('home.heroTitre')} className="max-w-3xl text-5xl font-bold leading-tight sm:text-7xl" />
+      <section className="relative flex min-h-[92vh] flex-col justify-end overflow-hidden text-white">
+        <img
+          src={heroImage}
+          alt="Aérogare de Yamoussoukro, Côte d’Ivoire"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-(--color-night) via-(--color-night)/55 to-(--color-night)/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-(--color-night)/70 via-transparent to-transparent" />
+
+        <Container className="relative z-10 pb-20 pt-32">
+          <SplitTitle
+            text={t('home.heroTitre')}
+            className="max-w-4xl text-6xl font-bold leading-[0.95] tracking-tight sm:text-8xl"
+          />
           <p className="mt-6 max-w-xl text-lg text-white/85">{t('home.heroSousTitre')}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button href="/meteo">{t('home.heroCta')}</Button>
@@ -121,8 +144,12 @@ export default function Home() {
             </div>
           </div>
         </Container>
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-white/60">↓ scroll</div>
       </section>
+
+      <Marquee
+        items={villesTicker}
+        className="bg-(--color-ivory-orange) text-(--color-night)"
+      />
 
       <PistePipeline />
 
@@ -138,14 +165,14 @@ export default function Home() {
             <div className="h-80 rounded-2xl bg-white/5 lg:h-96">
               {liteMode ? (
                 <div className="flex h-full flex-col items-center justify-center gap-2 text-white/50">
-                  <span className="text-4xl">🌍</span>
+                  <Icon name="globe" className="h-10 w-10" strokeWidth={1.2} />
                   <span className="text-xs">Mode connexion légère — globe 3D désactivé</span>
                 </div>
               ) : (
                 <ErrorBoundary
                   fallback={
                     <div className="flex h-full flex-col items-center justify-center gap-2 text-white/50">
-                      <span className="text-4xl">🌍</span>
+                      <Icon name="globe" className="h-10 w-10" strokeWidth={1.2} />
                       <span className="text-xs">Aperçu 3D indisponible sur cet appareil</span>
                     </div>
                   }
@@ -163,6 +190,21 @@ export default function Home() {
               </p>
               <Button href="/aeroports">Explorer la carte des aéroports</Button>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20">
+        <Container>
+          <SectionTitle eyebrow="Sur le terrain" title="Nos plateformes, en images" />
+          <div className="grid gap-4 sm:grid-cols-3">
+            {galerie.map((g) => (
+              <figure key={g.src} className="group relative overflow-hidden rounded-2xl">
+                <img src={g.src} alt={g.legende} className="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
+                <figcaption className="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">{g.legende}</figcaption>
+              </figure>
+            ))}
           </div>
         </Container>
       </section>
@@ -200,7 +242,7 @@ export default function Home() {
                 to={a.href}
                 className="group flex flex-col items-center gap-3 rounded-2xl border border-black/5 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-white/5"
               >
-                <span className="text-3xl">{a.icon}</span>
+                <Icon name={a.icon} className="h-7 w-7 text-(--color-ivory-orange)" strokeWidth={1.5} />
                 <span className="text-sm font-semibold">{a.label}</span>
               </Link>
             ))}

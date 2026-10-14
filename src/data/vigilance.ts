@@ -16,35 +16,37 @@ export const niveauConseil: Record<NiveauVigilance, string> = {
 
 export const niveauOrdre: NiveauVigilance[] = ['vert', 'jaune', 'orange', 'rouge']
 
-// Carte schématique (hex-grid) — positions approximatives, non cartographiques,
-// utilisées pour une visualisation stylisée des zones de vigilance.
+// Districts réels de Côte d'Ivoire (ADM1, geoBoundaries CC-BY 4.0) — la clé
+// `district` correspond exactement à la propriété `shapeName` du GeoJSON
+// utilisé par la carte de vigilance (src/assets/civ-districts.geojson).
 export type ZoneVigilance = {
-  code: string
+  district: string
   nom: string
-  col: number
-  row: number
   niveau: NiveauVigilance
   phenomene: string
   validite: string
 }
 
 export const zonesVigilance: ZoneVigilance[] = [
-  { code: 'DENG', nom: 'Denguélé', col: 1, row: 0, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
-  { code: 'SAV', nom: 'Savanes', col: 2, row: 0, niveau: 'jaune', phenomene: 'Harmattan / visibilité réduite', validite: 'Jusqu’à ce soir 18h' },
-  { code: 'ZAN', nom: 'Zanzan', col: 3, row: 0, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
-  { code: 'WOR', nom: 'Woroba', col: 1, row: 1, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
-  { code: 'VDB', nom: 'Vallée du Bandama', col: 2, row: 1, niveau: 'jaune', phenomene: 'Orages isolés', validite: 'Jusqu’à ce soir 20h' },
-  { code: 'COM', nom: 'Comoé', col: 3, row: 1, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
-  { code: 'MON', nom: 'Montagnes', col: 0, row: 2, niveau: 'orange', phenomene: 'Fortes pluies et risque de glissement', validite: 'Jusqu’à demain 12h' },
-  { code: 'SMA', nom: 'Sassandra-Marahoué', col: 1, row: 2, niveau: 'jaune', phenomene: 'Orages isolés', validite: 'Jusqu’à ce soir 20h' },
-  { code: 'LAC', nom: 'Lacs', col: 2, row: 2, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
-  { code: 'INDJ', nom: 'Indénié-Djuablin', col: 3, row: 2, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
-  { code: 'GOH', nom: 'Gôh-Djiboua', col: 0, row: 3, niveau: 'orange', phenomene: 'Cumuls de pluie importants', validite: 'Jusqu’à demain 12h' },
-  { code: 'LAG', nom: 'Lagunes', col: 1, row: 3, niveau: 'rouge', phenomene: 'Fortes pluies et risque d’inondation sur Abidjan', validite: 'Jusqu’à ce soir 23h' },
-  { code: 'LME', nom: 'La Mé', col: 2, row: 3, niveau: 'jaune', phenomene: 'Orages isolés', validite: 'Jusqu’à ce soir 20h' },
-  { code: 'BAS', nom: 'Bas-Sassandra', col: 0, row: 4, niveau: 'jaune', phenomene: 'Houle et vent fort en mer', validite: 'Jusqu’à demain 6h' },
-  { code: 'SCO', nom: 'Sud-Comoé', col: 2, row: 4, niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
+  { district: 'District Autonome D\'Abidjan', nom: 'District Autonome d’Abidjan', niveau: 'rouge', phenomene: 'Fortes pluies et risque d’inondation', validite: 'Jusqu’à ce soir 23h' },
+  { district: 'Montagnes', nom: 'Montagnes', niveau: 'orange', phenomene: 'Fortes pluies et risque de glissement de terrain', validite: 'Jusqu’à demain 12h' },
+  { district: 'Goh-Djiboua', nom: 'Gôh-Djiboua', niveau: 'orange', phenomene: 'Cumuls de pluie importants', validite: 'Jusqu’à demain 12h' },
+  { district: 'Lagunes', nom: 'Lagunes', niveau: 'jaune', phenomene: 'Orages isolés', validite: 'Jusqu’à ce soir 20h' },
+  { district: 'Bas-Sassandra', nom: 'Bas-Sassandra', niveau: 'jaune', phenomene: 'Houle et vent fort en mer', validite: 'Jusqu’à demain 6h' },
+  { district: 'Sassandra-Marahoue', nom: 'Sassandra-Marahoué', niveau: 'jaune', phenomene: 'Orages isolés', validite: 'Jusqu’à ce soir 20h' },
+  { district: 'Valle Du Bandama', nom: 'Vallée du Bandama', niveau: 'jaune', phenomene: 'Orages isolés', validite: 'Jusqu’à ce soir 20h' },
+  { district: 'Savanes', nom: 'Savanes', niveau: 'jaune', phenomene: 'Harmattan / visibilité réduite', validite: 'Jusqu’à ce soir 18h' },
+  { district: 'District Autonome De Yamoussoukro', nom: 'District Autonome de Yamoussoukro', niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
+  { district: 'Denguele', nom: 'Denguélé', niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
+  { district: 'Woroba', nom: 'Woroba', niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
+  { district: 'Zanzan', nom: 'Zanzan', niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
+  { district: 'Comoe', nom: 'Comoé', niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
+  { district: 'Lacs', nom: 'Lacs', niveau: 'vert', phenomene: 'Aucun', validite: 'Jusqu’à demain 6h' },
 ]
+
+export function zoneParDistrict(shapeName: string) {
+  return zonesVigilance.find((z) => z.district.toLowerCase() === shapeName.toLowerCase())
+}
 
 export type BulletinVigilance = {
   id: string

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Icon } from '../design-system/Icon'
+import logo from '../assets/sodexam-logo.png'
 
 export function Footer() {
   const { t } = useTranslation()
@@ -8,8 +10,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="font-display text-lg font-bold text-white">SODEXAM</div>
-            <p className="mt-3 text-sm text-white/60">
+            <img src={logo} alt="SODEXAM" className="h-8 w-auto" />
+            <p className="mt-4 text-sm text-white/60">
               Société d’État chargée de l’exploitation aéroportuaire, de la navigation aérienne et de la météorologie en Côte d’Ivoire.
             </p>
           </div>
@@ -42,8 +44,9 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 rounded-xl border border-orange-400/30 bg-orange-400/10 p-4 text-xs text-orange-100">
-          ⚠ {t('footer.mentionDemo')}
+        <div className="mt-10 flex items-start gap-2 rounded-xl border border-orange-400/30 bg-orange-400/10 p-4 text-xs text-orange-100">
+          <Icon name="alert-triangle" className="mt-0.5 h-4 w-4 shrink-0" />
+          {t('footer.mentionDemo')}
         </div>
         <div className="mt-6 flex flex-col items-center justify-between gap-2 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row">
           <span>© {new Date().getFullYear()} SODEXAM — {t('footer.droits')}</span>

@@ -4,7 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Container, Card, SectionTitle } from '../design-system/Card'
 import { Button } from '../design-system/Button'
 import { SplitTitle } from '../components/SplitTitle'
+import { Icon } from '../design-system/Icon'
 import { seededRandom } from '../lib/rng'
+import cermaImage from '../assets/photos/cerma-entree.jpg'
 
 const etapes = [
   { titre: 'Prise de rendez-vous', texte: 'Choisissez votre classe d’examen et un créneau disponible en ligne.' },
@@ -48,11 +50,18 @@ export default function Cerma() {
   return (
     <div className="py-16">
       <Container>
-        <SplitTitle text="CERMA" className="text-4xl font-bold sm:text-5xl" />
-        <p className="mt-4 max-w-2xl text-black/60 dark:text-white/60">
-          Centre d’Expertise et de Recherche en Médecine Aéronautique — visites médicales d’aptitude du personnel
-          navigant et des candidats aux métiers aéronautiques.
-        </p>
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div>
+            <SplitTitle text="CERMA" className="text-4xl font-bold sm:text-5xl" />
+            <p className="mt-4 max-w-2xl text-black/60 dark:text-white/60">
+              Centre d’Expertise et de Recherche en Médecine Aéronautique — visites médicales d’aptitude du personnel
+              navigant et des candidats aux métiers aéronautiques.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-2xl">
+            <img src={cermaImage} alt="Entrée du Centre Régional de Médecine Aéronautique et Aéroportuaire" className="h-56 w-full object-cover sm:h-64" />
+          </div>
+        </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-4">
           {etapes.map((e, i) => (
@@ -136,9 +145,9 @@ export default function Cerma() {
                   initial={{ x: -40, y: 20, rotate: -20, opacity: 0 }}
                   animate={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
                   transition={{ duration: 0.8, ease: 'easeOut' }}
-                  className="text-5xl"
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-(--color-forest)/10"
                 >
-                  ✈️
+                  <Icon name="check" className="h-8 w-8 text-(--color-forest)" strokeWidth={2} />
                 </motion.div>
                 <h3 className="mt-4 font-display text-xl font-semibold">Rendez-vous confirmé</h3>
                 <p className="mt-2 text-sm text-black/60 dark:text-white/60">

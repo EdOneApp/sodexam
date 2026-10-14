@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { Container, SectionTitle } from '../design-system/Card'
 import { SplitTitle } from '../components/SplitTitle'
 import { Button } from '../design-system/Button'
+import { Icon } from '../design-system/Icon'
 import { actualites, type Actualite } from '../data/actualites'
 
 const themes: Array<Actualite['theme'] | 'Tous'> = ['Tous', 'Météo', 'Aéroports', 'CERMA', 'Institution', 'Projet']
@@ -65,7 +66,10 @@ export default function Actualites() {
         <SectionTitle eyebrow="Newsletter" title="Restez informé" />
         <div className="max-w-md">
           {envoye ? (
-            <p className="text-sm font-medium text-(--color-forest)">✓ Inscription confirmée (simulation).</p>
+            <p className="flex items-center gap-2 text-sm font-medium text-(--color-forest)">
+              <Icon name="check" className="h-4 w-4" />
+              Inscription confirmée (simulation).
+            </p>
           ) : (
             <form onSubmit={(e) => { e.preventDefault(); setEnvoye(true) }} className="flex gap-2">
               <input required type="email" placeholder="Votre email" className="flex-1 rounded-full border border-black/10 px-4 py-2.5 text-sm dark:border-white/10 dark:bg-white/5" />

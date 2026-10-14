@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { Icon } from '../design-system/Icon'
+import logo from '../assets/sodexam-logo.png'
 
 type MenuItem = { label: string; href: string; desc: string }
 type MenuGroup = { label: string; items: MenuItem[] }
@@ -60,13 +62,8 @@ export function Header({ onOpenSearch }: { onOpenSearch: () => void }) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-(--color-night)/90 backdrop-blur-md text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
-          <svg viewBox="0 0 48 48" className="h-8 w-8">
-            <circle cx="24" cy="24" r="24" fill="#0A1F44" />
-            <circle cx="24" cy="24" r="16" fill="none" stroke="#22D3EE" strokeWidth="1" opacity="0.5" />
-            <path d="M24 7 L27 23 L41 27 L27 29 L24 41 L21 29 L7 27 L21 23 Z" fill="#F77F00" />
-          </svg>
-          SODEXAM
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="SODEXAM" className="h-7 w-auto sm:h-8" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setOpenMenu(null)}>
@@ -114,9 +111,10 @@ export function Header({ onOpenSearch }: { onOpenSearch: () => void }) {
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenSearch}
-            className="hidden items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70 hover:bg-white/10 sm:flex"
+            className="hidden items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70 hover:bg-white/10 sm:flex"
             aria-label={t('nav.rechercher')}
           >
+            <Icon name="search" className="h-3.5 w-3.5" />
             <span>⌘K</span>
           </button>
           <button
@@ -127,17 +125,19 @@ export function Header({ onOpenSearch }: { onOpenSearch: () => void }) {
           </button>
           <button
             onClick={() => setMode(mode === 'dark' ? 'light' : mode === 'light' ? 'auto' : 'dark')}
-            className="rounded-full border border-white/15 px-3 py-1.5 text-xs hover:bg-white/10"
+            className="rounded-full border border-white/15 p-2 hover:bg-white/10"
             title="Basculer le thème"
+            aria-label="Basculer le thème"
           >
-            {isDark ? '🌙' : '☀️'}
+            <Icon name={isDark ? 'moon' : 'sun'} className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => setLiteMode(!liteMode)}
-            className={`hidden rounded-full border px-3 py-1.5 text-xs sm:block ${liteMode ? 'border-(--color-ivory-orange) bg-(--color-ivory-orange)/20' : 'border-white/15 hover:bg-white/10'}`}
+            className={`hidden rounded-full border p-2 sm:block ${liteMode ? 'border-(--color-ivory-orange) bg-(--color-ivory-orange)/20 text-(--color-ivory-orange)' : 'border-white/15 hover:bg-white/10'}`}
             title="Mode connexion légère : désactive 3D et vidéos"
+            aria-label="Mode connexion légère"
           >
-            🐢
+            <Icon name="turtle" className="h-3.5 w-3.5" />
           </button>
           <Link
             to="/login"

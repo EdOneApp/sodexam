@@ -2,6 +2,7 @@ import { useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import { Container, SectionTitle } from '../design-system/Card'
 import { SplitTitle } from '../components/SplitTitle'
 import { Button } from '../design-system/Button'
+import { Icon } from '../design-system/Icon'
 import { produits } from '../data/produits'
 
 function TiltCard({ children }: { children: ReactNode }) {
@@ -65,7 +66,10 @@ function FormDevis() {
   return (
     <div className="max-w-xl rounded-2xl border border-black/10 p-6 dark:border-white/10">
       {envoye ? (
-        <p className="text-sm font-medium text-(--color-forest)">✓ Demande envoyée (simulation). Notre équipe commerciale fictive vous répondra sous 48h.</p>
+        <p className="flex items-center gap-2 text-sm font-medium text-(--color-forest)">
+          <Icon name="check" className="h-4 w-4" />
+          Demande envoyée (simulation). Notre équipe commerciale fictive vous répondra sous 48h.
+        </p>
       ) : (
         <form
           onSubmit={(e) => {

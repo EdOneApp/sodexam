@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { repondre } from '../lib/chatbot'
+import { Icon } from '../design-system/Icon'
 
 type Msg = { from: 'bot' | 'user'; text: string }
 
@@ -55,8 +56,8 @@ export function ChatbotWidget() {
                 placeholder="Votre question…"
                 className="flex-1 rounded-full bg-white/10 px-3 py-2 text-sm outline-none placeholder:text-white/40"
               />
-              <button onClick={send} className="rounded-full bg-(--color-ivory-orange) px-3 py-2 text-sm font-semibold">
-                ➤
+              <button onClick={send} className="flex items-center justify-center rounded-full bg-(--color-ivory-orange) p-2.5 text-white" aria-label="Envoyer">
+                <Icon name="send" className="h-4 w-4" />
               </button>
             </div>
           </motion.div>
@@ -64,10 +65,10 @@ export function ChatbotWidget() {
       </AnimatePresence>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-(--color-ivory-orange) text-2xl text-white shadow-lg shadow-orange-900/30 transition hover:scale-105"
+        className="sheen flex h-14 w-14 items-center justify-center rounded-full bg-(--color-ivory-orange) text-white shadow-lg shadow-orange-900/30 transition hover:scale-105"
         aria-label="Ouvrir l’assistant"
       >
-        {open ? '✕' : '💬'}
+        <Icon name={open ? 'close' : 'chat'} className="h-6 w-6" strokeWidth={1.6} />
       </button>
     </div>
   )

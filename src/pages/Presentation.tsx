@@ -3,6 +3,7 @@ import { Container, Card, SectionTitle } from '../design-system/Card'
 import { SplitTitle } from '../components/SplitTitle'
 import { frise } from '../data/gouvernance'
 import { AirportsMap } from '../components/AirportsMap'
+import { MapBoundary } from '../components/MapBoundary'
 
 const valeurs = [
   { titre: 'Rigueur', texte: 'Des données et services conformes aux standards internationaux (OMM, OACI, ISO 9001).' },
@@ -70,7 +71,9 @@ export default function Presentation() {
         </div>
 
         <SectionTitle eyebrow="Implantations" title="Nos plateformes sur le territoire" />
-        <AirportsMap height={420} />
+        <MapBoundary height={420}>
+          <AirportsMap height={420} />
+        </MapBoundary>
       </Container>
     </div>
   )

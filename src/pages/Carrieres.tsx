@@ -4,7 +4,9 @@ import { Container, Card, SectionTitle } from '../design-system/Card'
 import { Button } from '../design-system/Button'
 import { StatCounter } from '../design-system/StatCounter'
 import { SplitTitle } from '../components/SplitTitle'
+import { Icon } from '../design-system/Icon'
 import { metiers, offres } from '../data/metiers'
+import engagementImage from '../assets/photos/korhogo-jme.jpg'
 
 export default function Carrieres() {
   const [index, setIndex] = useState(0)
@@ -23,6 +25,12 @@ export default function Carrieres() {
           <StatCounter value={8} label="Plateformes" />
           <StatCounter value={45} suffix="%" label="Femmes dans l’effectif" />
           <StatCounter value={120} suffix="+" label="Recrutements / an" />
+        </div>
+
+        <div className="relative mt-10 h-64 overflow-hidden rounded-3xl sm:h-80">
+          <img src={engagementImage} alt="Engagement SODEXAM sur une plateforme régionale" className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <p className="absolute bottom-5 left-5 text-sm font-medium text-white">Journée de sensibilisation sur une plateforme SODEXAM</p>
         </div>
 
         <SectionTitle eyebrow="Métiers" title="Nos métiers en vitrine" />
@@ -68,7 +76,10 @@ export default function Carrieres() {
                 <form className="mt-4 space-y-3" onSubmit={(e) => { e.preventDefault(); setCandidature(null) }}>
                   <input required placeholder="Nom complet" className="w-full rounded-lg border border-black/10 px-4 py-2 text-sm dark:border-white/10 dark:bg-white/5" />
                   <input required type="email" placeholder="Email" className="w-full rounded-lg border border-black/10 px-4 py-2 text-sm dark:border-white/10 dark:bg-white/5" />
-                  <div className="flex items-center gap-2 text-sm text-black/50 dark:text-white/50">📎 CV (simulation, aucun fichier n’est envoyé)</div>
+                  <div className="flex items-center gap-2 text-sm text-black/50 dark:text-white/50">
+                    <Icon name="paperclip" className="h-4 w-4" />
+                    CV (simulation, aucun fichier n’est envoyé)
+                  </div>
                   <div className="flex justify-end gap-2">
                     <button type="button" onClick={() => setCandidature(null)} className="rounded-full px-4 py-2 text-sm">Annuler</button>
                     <Button type="submit">Envoyer</Button>
