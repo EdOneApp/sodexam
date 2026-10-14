@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "accueil": "Home",
+    "institution": "Institution",
+    "presentation": "About",
+    "motDg": "CEO Message",
+    "gouvernance": "Governance",
+    "meteo": "Weather",
+    "previsions": "Forecasts by city",
+    "vigilance": "Vigilance",
+    "marine": "Marine weather",
+    "agrometeo": "Agromet & climate",
+    "aeronautique": "Aeronautical weather",
+    "aeroports": "Airports",
+    "nosAeroports": "Our airports",
+    "navigationAerienne": "Air navigation",
+    "services": "Services",
+    "cerma": "CERMA",
+    "produits": "Weather catalogue",
+    "actualites": "News",
+    "carrieres": "Careers",
+    "appelsOffres": "Tenders",
+    "contact": "Contact",
+    "connexion": "Sign in",
+    "rechercher": "Search"
+  },
+  "home": {
+    "heroTitre": "From the sky to the runway",
+    "heroSousTitre": "Côte d’Ivoire’s official weather and airport services, for everyone.",
+    "heroCta": "Check my city’s weather",
+    "heroCtaSecondaire": "Live vigilance",
+    "chiffresTitre": "SODEXAM in numbers",
+    "actualitesTitre": "Latest news",
+    "accesRapides": "Quick access",
+    "partenaires": "Our partners"
+  },
+  "common": {
+    "voirPlus": "See more",
+    "voirTout": "See all",
+    "enSavoirPlus": "Learn more",
+    "telecharger": "Download",
+    "retour": "Back",
+    "fermer": "Close",
+    "chargement": "Loading…",
+    "demo": "Demonstration site — fictional data",
+    "langue": "Français"
+  },
+  "footer": {
+    "liensUtiles": "Useful links",
+    "suivezNous": "Follow us",
+    "mentionDemo": "This site is a demonstration showcase. All displayed data (weather, vigilance, flights, appointments, news) is fictional and automatically generated, except for the cited public institutional facts.",
+    "droits": "All rights reserved"
+  }
+}

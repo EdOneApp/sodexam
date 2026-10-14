@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SODEXAM</title>
+    <script type="text/javascript">
+      // Redirection SPA pour GitHub Pages : https://github.com/rafgraph/spa-github-pages
+      // GitHub Pages ne connaît pas les routes React Router ; on encode le chemin demandé
+      // dans la query string et on le restaure dans index.html avant que React ne démarre.
+      var segmentCount = 0
+      var l = window.location
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+          l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+          l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

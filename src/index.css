@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-sans: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", monospace;
+
+  --color-night: #0a1f44;
+  --color-sky: #1e88e5;
+  --color-radar: #22d3ee;
+  --color-ivory-orange: #f77f00;
+  --color-forest: #009e60;
+  --color-sand: #f5f1e8;
+
+  --color-vigilance-green: #1b9e5a;
+  --color-vigilance-yellow: #e8b800;
+  --color-vigilance-orange: #f77f00;
+  --color-vigilance-red: #e0292e;
+
+  --radius-card: 16px;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-sand);
+  color: #101826;
+  -webkit-font-smoothing: antialiased;
+}
+
+html.dark body {
+  background-color: var(--color-night);
+  color: #eef2f8;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-data {
+  font-family: var(--font-mono);
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: color-mix(in srgb, white 10%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in srgb, white 18%, transparent);
+}
+
+html.dark .glass {
+  background: color-mix(in srgb, white 6%, transparent);
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-sky) 40%, transparent); border-radius: 8px; }
+
+/* Reduced motion kill-switch */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+@keyframes pulse-alert {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.animate-pulse-alert {
+  animation: pulse-alert 2.2s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% { transform: translateX(-10%); }
+  100% { transform: translateX(110%); }
+}
+
+.maplibregl-ctrl-attrib { font-size: 10px; }

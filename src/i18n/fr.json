@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "accueil": "Accueil",
+    "institution": "Institution",
+    "presentation": "Présentation",
+    "motDg": "Mot du DG",
+    "gouvernance": "Gouvernance",
+    "meteo": "Météo",
+    "previsions": "Prévisions par ville",
+    "vigilance": "Vigilance",
+    "marine": "Météo marine",
+    "agrometeo": "Agrométéo et climat",
+    "aeronautique": "Météo aéronautique",
+    "aeroports": "Aéroports",
+    "nosAeroports": "Nos aéroports",
+    "navigationAerienne": "Navigation aérienne",
+    "services": "Services",
+    "cerma": "CERMA",
+    "produits": "Catalogue météo",
+    "actualites": "Actualités",
+    "carrieres": "Carrières",
+    "appelsOffres": "Appels d’offres",
+    "contact": "Contact",
+    "connexion": "Connexion",
+    "rechercher": "Rechercher"
+  },
+  "home": {
+    "heroTitre": "Du ciel à la piste",
+    "heroSousTitre": "La météo officielle et les aéroports de Côte d’Ivoire, au service de tous.",
+    "heroCta": "Voir la météo de ma ville",
+    "heroCtaSecondaire": "Vigilance en direct",
+    "chiffresTitre": "La SODEXAM en chiffres",
+    "actualitesTitre": "À la une",
+    "accesRapides": "Accès rapides",
+    "partenaires": "Nos partenaires"
+  },
+  "common": {
+    "voirPlus": "Voir plus",
+    "voirTout": "Voir tout",
+    "enSavoirPlus": "En savoir plus",
+    "telecharger": "Télécharger",
+    "retour": "Retour",
+    "fermer": "Fermer",
+    "chargement": "Chargement…",
+    "demo": "Site de démonstration — données fictives",
+    "langue": "English"
+  },
+  "footer": {
+    "liensUtiles": "Liens utiles",
+    "suivezNous": "Suivez-nous",
+    "mentionDemo": "Ce site est une vitrine de démonstration. Toutes les données affichées (météo, vigilance, vols, rendez-vous, actualités) sont fictives et générées automatiquement, à l’exception des faits institutionnels publics cités.",
+    "droits": "Tous droits réservés"
+  }
+}
